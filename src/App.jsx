@@ -68,7 +68,7 @@ const data = [
 ];
 
 
-// import "./App.css"
+
 
 function App() {
 
