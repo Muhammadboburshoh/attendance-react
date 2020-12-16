@@ -1,5 +1,8 @@
+import React from 'react';
+import {useState} from "react"
+
 const users = [
-  { id: 1, username: 'MuhammadSiddiq' },
+    { id: 1, username: 'MuhammadSiddiq' },
   { id: 2, username: 'Ilhomjon' },
   { id: 3, username: 'Muhammadbobur' },
   { id: 4, username: 'Shuhratbek' },
@@ -68,22 +71,22 @@ const data = [
 ];
 
 
-
-
 function App() {
 
   let userId = 1;
 
+  const [filtered, setFilter] = useState(data.filter(object => object.getUserId === 1))
+
+
+
   const renderUsersAbout = (evt) => {
-    if(evt && evt.type === "change") {
        userId = Number(document.getElementById('userSelect').value)
-    }
-    console.log(userId);
+      setFilter(data.filter(object => object.getUserId === userId))
   }
 
   return (
     <>
-      <select id="userSelect" onChange={renderUsersAbout}>
+      <select defaultValue={1} id="userSelect" onChange={renderUsersAbout}>
         {
           users.map(user => {
             return (
@@ -104,22 +107,18 @@ function App() {
       </thead>
       <tbody className="users-result-about">
         {
-           users.map( () => {
-            const filtered = data.filter(object => object.getUserId === userId)
-
-            filtered.forEach(user => {
-              return (
-                <tr className="user-about">
-                  {console.log("Allohu akbar")}
-                  <th className="user-id" scope="row">users</th>
-                  <td className="user-data" >04-09-2020</td>
-                  <td className="user-visit">OK</td>
-                  <td className="user-score">6</td>
-                </tr>
-              )
-            })
+          filtered.map((data) => {
+            return (
+              <tr key={data.id}>
+                <td>{data.getUserId}</td>
+                <td>{data.visitDay}</td>
+                <td>{data.visit ? "ok" : "-"}</td>
+                <td>{data.score}</td>
+              </tr>
+            );
           })
         }
+        
       </tbody>
     </table>
     </>
