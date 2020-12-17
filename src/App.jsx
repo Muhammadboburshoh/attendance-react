@@ -1,6 +1,7 @@
 import React from 'react';
-import {useState, useRef} from "react"
+import {useState} from "react"
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "./App.css"
 
 const users = [
     { id: 1, username: 'MuhammadSiddiq' },
@@ -77,12 +78,10 @@ function App() {
   let userId = 1;
 
   const [filtered, setFilter] = useState(data.filter(object => object.getUserId === 1))
-  const htmlElement = useRef()
-  const [dataFilter, setDataFilter] = useState([])
 
   const renderUsersAbout = (evt) => {
-       userId = Number(document.getElementById('userSelect').value)
-      setFilter(data.filter(object => object.getUserId === userId))
+    userId = Number(document.getElementById('userSelect').value)
+    setFilter(data.filter(object => object.getUserId === userId))
   }
 
   return (
@@ -109,21 +108,8 @@ function App() {
       <tbody className="users-result-about">
         {
           filtered.map((data) => {
-            // setDataFilter([data])
             return (
-              <tr ref={htmlElement} key={data.id}>
-                {
-                  /* dataFilter.map((dataVisit) => {
-                    console.log(dataVisit);
-                    if (dataVisit.visit) {
-                      console.log("ab")
-                      // htmlElement.current.classList.add("bg-success")
-                    } else {
-                      // htmlElement.current.classList.add("bg-danger")
-                      console.log("ba")
-                    } 
-                  }) */
-                }
+              <tr className={data.visit ? "bg-success" : "error-color"} key={data.id}>
                 <td>{data.getUserId}</td>
                 <td>{data.visitDay}</td>
                 <td>{data.visit ? "ok" : "-"}</td>
@@ -131,7 +117,6 @@ function App() {
               </tr>
             )
           })
-          
         }
         
       </tbody>
