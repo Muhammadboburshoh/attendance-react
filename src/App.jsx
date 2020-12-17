@@ -112,8 +112,8 @@ function App() {
               <tr className={data.visit ? "bg-success" : "error-color"} key={data.id}>
                 <td>{data.getUserId}</td>
                 <td>{data.visitDay}</td>
-                <td>{data.visit ? "ok" : "-"}</td>
-                <td>{data.score}</td>
+                <td>{data.visit ? "OK" : "-"}</td>
+                <td>{data.visit ? data.score : 0}</td>
               </tr>
             )
           })
