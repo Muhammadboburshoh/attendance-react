@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState} from "react"
+import {useState, useRef} from "react"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 const users = [
     { id: 1, username: 'MuhammadSiddiq' },
@@ -76,8 +77,8 @@ function App() {
   let userId = 1;
 
   const [filtered, setFilter] = useState(data.filter(object => object.getUserId === 1))
-
-
+  const htmlElement = useRef()
+  const [dataFilter, setDataFilter] = useState([])
 
   const renderUsersAbout = (evt) => {
        userId = Number(document.getElementById('userSelect').value)
@@ -85,8 +86,8 @@ function App() {
   }
 
   return (
-    <>
-      <select defaultValue={1} id="userSelect" onChange={renderUsersAbout}>
+    <div className="container">
+      <select className="custom-select mt-5 mx-auto d-block w-50" defaultValue={1} id="userSelect" onChange={renderUsersAbout}>
         {
           users.map(user => {
             return (
@@ -108,20 +109,34 @@ function App() {
       <tbody className="users-result-about">
         {
           filtered.map((data) => {
+            // setDataFilter([data])
             return (
-              <tr key={data.id}>
+              <tr ref={htmlElement} key={data.id}>
+                {
+                  /* dataFilter.map((dataVisit) => {
+                    console.log(dataVisit);
+                    if (dataVisit.visit) {
+                      console.log("ab")
+                      // htmlElement.current.classList.add("bg-success")
+                    } else {
+                      // htmlElement.current.classList.add("bg-danger")
+                      console.log("ba")
+                    } 
+                  }) */
+                }
                 <td>{data.getUserId}</td>
                 <td>{data.visitDay}</td>
                 <td>{data.visit ? "ok" : "-"}</td>
                 <td>{data.score}</td>
               </tr>
-            );
+            )
           })
+          
         }
         
       </tbody>
     </table>
-    </>
+    </div>
   )
 }
 
